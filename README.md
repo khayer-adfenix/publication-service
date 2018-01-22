@@ -1,0 +1,2 @@
+# publication-service
+rabbitmq publisher
