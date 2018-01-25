@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  publicationservice:
+    image: publicationservice
+    build:
+      context: .
+      dockerfile: PublicationService/Dockerfile
+    depends_on: 
+      - rabbitmq
+
+  consumerservice:
+    image: consumerservice
+    build:
+      context: .
+      dockerfile: ConsumerService/Dockerfile
+    depends_on: 
+      - rabbitmq
+
+  rabbitmq:
+    image: "rabbitmq:3-management"   
+    hostname: "rabbit"
+    ports:
+      - "15672:15672"
+      - "5672:5672"
