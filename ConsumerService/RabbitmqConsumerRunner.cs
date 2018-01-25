@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using AdFenix.RabbitmqNetCore;
 
 namespace ConsumerService
@@ -21,6 +22,9 @@ namespace ConsumerService
         }
         public void Run()
         {
+            Console.WriteLine($"Starting Rabbit Reciver..");
+            Thread.Sleep(5000);
+
             this.rabbitmqConsumerService.SetQueue(RabbitmqConfig.ExchangeBasicEvent,
                 RabbitmqExchangeType.Direct,
                 RabbitmqConfig.QueueBasicEvent,

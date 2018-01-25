@@ -23,3 +23,10 @@ services:
     ports:
       - "15672:15672"
       - "5672:5672"
+  postgres:
+    image: postgres:9.5
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5433:5432"
