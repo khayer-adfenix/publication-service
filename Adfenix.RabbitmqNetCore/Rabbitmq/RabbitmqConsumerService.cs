@@ -12,7 +12,6 @@ namespace AdFenix.RabbitmqNetCore
     public class RabbitmqConsumerService : IRabbitmqConsumerService
     {
         private IRabbitmqConnect rabbitmqConnect;
-        private IModel Channel;
         private IActionCommandDispacher actionCommandDispacher;
         //private ILogger logger;
         private const string commandTypeName = "commandType";
@@ -76,6 +75,7 @@ namespace AdFenix.RabbitmqNetCore
                             //Todo: Need to acknowledge to System admin.(slack, email)
                             isSucceedAck = false;
                             //this.logger.Error(ex, "Error in Basic Consumer");
+                            Console.WriteLine(ex);
 
                         }
                     }
@@ -92,7 +92,8 @@ namespace AdFenix.RabbitmqNetCore
             }
             catch (Exception ex)
             {
-                var errorMsg = "Rabbitmq ReceiveMessages failed.";
+                //var errorMsg = "Rabbitmq ReceiveMessages failed.";
+                Console.WriteLine(ex);
                 //this.logger.Error(ex, errorMsg);
                 //this.slackSimpleClient.PostException(SlackSetting.ERROR_EXCEPTION_WEB_HOOK, ex, errorMsg);
             }
@@ -127,6 +128,7 @@ namespace AdFenix.RabbitmqNetCore
                 var errorMsg = String.Format("Rabbitmq ReceiveMessages<{0}> failed.", typeof(T).ToString());
                 //this.logger.Error(ex, errorMsg);
                 //this.slackSimpleClient.PostException(SlackSetting.ERROR_EXCEPTION_WEB_HOOK, ex, errorMsg);
+                Console.WriteLine(ex);
             }
         }
 
@@ -145,6 +147,7 @@ namespace AdFenix.RabbitmqNetCore
             {
                 isSucceedAck = false;
                 //this.logger.Error(ex, "Error in Basic Consumer");
+                Console.WriteLine(ex);
             }
 
             return isSucceedAck;
@@ -166,9 +169,10 @@ namespace AdFenix.RabbitmqNetCore
             }
             catch (Exception ex)
             {
-                var errMsg = "Error in HandleAck";
+                //var errMsg = "Error in HandleAck";
                 //this.logger.Error(ex, errMsg);
                 //this.slackSimpleClient.PostException(SlackSetting.ERROR_EXCEPTION_WEB_HOOK, ex, errMsg);
+                Console.WriteLine(ex);
             }
         }
     }

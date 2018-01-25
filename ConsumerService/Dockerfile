@@ -1,12 +1,11 @@
-FROM microsoft/dotnet:2.0-runtime AS base
+FROM microsoft/aspnetcore:2.0 AS base
 WORKDIR /app
+EXPOSE 80
 
-FROM microsoft/dotnet:2.0-sdk AS build
+FROM microsoft/aspnetcore-build:2.0 AS build
 WORKDIR /src
 COPY *.sln ./
 COPY ConsumerService/ConsumerService.csproj ConsumerService/
-COPY Adfenix.RabbitmqNetCore/Adfenix.RabbitmqNetCore.csproj Adfenix.RabbitmqNetCore/
-COPY AdFenix.InfrastructureNetCore/AdFenix.InfrastructureNetCore.csproj AdFenix.InfrastructureNetCore/
 RUN dotnet restore
 COPY . .
 WORKDIR /src/ConsumerService

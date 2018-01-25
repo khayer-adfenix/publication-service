@@ -30,6 +30,7 @@ namespace AdFenix.RabbitmqNetCore
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex);
                 //this.logger.Error(ex,ex.Message);
             }
         }
@@ -42,6 +43,7 @@ namespace AdFenix.RabbitmqNetCore
             catch (Exception ex)
             {
                 //this.logger.Error(ex, "error in CloseChannel.");
+                Console.WriteLine(ex);
             }
         }
         public void SetExchange(string exchangeName,string exchangeType)
@@ -52,9 +54,10 @@ namespace AdFenix.RabbitmqNetCore
             }
             catch (Exception e)
             {
-                var errorMsg = "Publisher SetExchange failed.";
+                //var errorMsg = "Publisher SetExchange failed.";
                 //this.logger.Error(e, errorMsg);
                 //this.slackSimpleClient.PostException(SlackSetting.ERROR_EXCEPTION_WEB_HOOK,e, errorMsg);
+                Console.WriteLine(e);
             }
         }
         public void BasicPublish(string exchangeName,IQueueCommand command, string routingKey = "",bool isDoChannelClose=true)
@@ -73,17 +76,18 @@ namespace AdFenix.RabbitmqNetCore
 
                 var address = new PublicationAddress(ExchangeType.Fanout, exchangeName, routingKey);
 
-                //Retry.Do(() =>
-                //{
-                //    this.Channel.BasicPublish(address, basicProperties, body);
-                //}, TimeSpan.FromSeconds(1));
-                this.Channel.BasicPublish(address, basicProperties, body);
+                Retry.Do(() =>
+                {
+                    this.Channel.BasicPublish(address, basicProperties, body);
+                }, TimeSpan.FromSeconds(1));
+
             }
             catch (Exception e)
             {
-                var erroMsg = "Rabbitmq Message published failed.";
+                //var erroMsg = "Rabbitmq Message published failed.";
                 //this.logger.Error(e, erroMsg);
                 //this.slackSimpleClient.PostException(SlackSetting.ERROR_EXCEPTION_WEB_HOOK, e, erroMsg);
+                Console.WriteLine(e);
             }
 
             //this.logger.Info($"Publish to {exchangeName}");

@@ -35,6 +35,7 @@ namespace dFenix.InfrastructureNetCore
             }
             catch (Exception e)
             {
+                Console.WriteLine(e);
                 //this.logger.Warn($"Could not find \"{command.ToString()}\" handler. Skipped this command.");
                 return;
             }
