@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
+    <AssemblyName>AdFenix.RabbitmqNetCore</AssemblyName>
+    <RootNamespace>AdFenix.RabbitmqNetCore</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

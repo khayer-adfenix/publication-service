@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Adfenix.RabbitmqNetCore\Adfenix.RabbitmqNetCore.csproj" />
+    <ProjectReference Include="..\Adfenix.RabbitmqNetCore\AdFenix.RabbitmqNetCore.csproj" />
   </ItemGroup>
 
 </Project>

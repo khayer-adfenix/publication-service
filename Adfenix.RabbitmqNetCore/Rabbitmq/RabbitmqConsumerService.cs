@@ -43,6 +43,7 @@ namespace AdFenix.RabbitmqNetCore
                 var errorMsg = "Rabbitmq Set Queue failed.";
                 //this.logger.Error(ex,errorMsg);
                 //this.slackSimpleClient.PostException(SlackSetting.ERROR_EXCEPTION_WEB_HOOK,ex,errorMsg);
+                Console.WriteLine(errorMsg + ":" +ex.Message);
             }
         }
 
