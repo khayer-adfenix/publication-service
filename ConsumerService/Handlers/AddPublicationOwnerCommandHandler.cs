@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using AdFenix.Entities.DatabaseContext;
 using AdFenix.Entities.DomainObject;
 using AdFenix.InfrastructureNetCore;
-using ConsumerService.DatabaseContext;
 using dFenix.InfrastructureNetCore;
 
 namespace ConsumerService.Handlers

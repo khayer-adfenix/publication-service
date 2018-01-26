@@ -4,7 +4,7 @@ using System.Text;
 using AdFenix.Entities.DomainObject;
 using Microsoft.EntityFrameworkCore;
 
-namespace ConsumerService.DatabaseContext
+namespace AdFenix.Entities.DatabaseContext
 {
     public class AdFenixDbConext : DbContext
     {

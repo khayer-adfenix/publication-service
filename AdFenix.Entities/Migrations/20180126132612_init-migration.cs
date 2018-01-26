@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 using System.Collections.Generic;
 
-namespace ConsumerService.Migrations
+namespace AdFenix.Entities.Migrations
 {
-    public partial class inital : Migration
+    public partial class initmigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

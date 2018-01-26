@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using AdFenix.Entities;
 using AdFenix.InfrastructureNetCore;
 using AdFenix.RabbitmqNetCore;
-using ConsumerService.DatabaseContext;
 using ConsumerService.Handlers;
 using dFenix.InfrastructureNetCore;
 using Microsoft.AspNetCore.Builder;
@@ -34,13 +34,8 @@ namespace ConsumerService
 
             RegisterCustomServices(services);
 
-            var connectionString = Configuration["connectionStrings:AdfenixConnectionString"];
-
-            //services.AddEntityFrameworkNpgsql()
-            //    .AddDbContext<AdFenixDbConext>(options =>
-            //        options.UseNpgsql(connectionString));
-
-            services.AddDbContext<AdFenixDbConext>(o => o.UseNpgsql(connectionString));
+            //var connectionString = Configuration["connectionStrings:AdfenixConnectionString"];
+            //services.AddDbContext<AdFenixDbConext>(o => o.UseNpgsql(connectionString));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -75,6 +70,9 @@ namespace ConsumerService
 
             InfrastructureServiceRegistration.Register(services, out services);
             RabbitmqServiceRegistration.Register(services, out services);
+
+            var connectionString = Configuration["ConnectionStrings:AdfenixConnectionString"];
+            DataContextRegistration.Register(services, connectionString);
 
             services
                 .AddTransient<IActionCommandHandler<AddPublicationOwnerCommand>, AddPublicationOwnerCommandHandler>();
