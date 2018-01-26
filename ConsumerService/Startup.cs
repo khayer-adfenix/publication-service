@@ -69,12 +69,14 @@ namespace ConsumerService
                 Console.WriteLine(e);
             }
         }
-        public void RegisterCustomServices(IServiceCollection service)
+        public void RegisterCustomServices(IServiceCollection services)
         {
-            InfrastructureServiceRegistration.Register(service, out service);
-            RabbitmqServiceRegistration.Register(service, out service);
+            services.Configure<RabbitmqOptions>(Configuration.GetSection("Rabbitmq"));
 
-            service
+            InfrastructureServiceRegistration.Register(services, out services);
+            RabbitmqServiceRegistration.Register(services, out services);
+
+            services
                 .AddTransient<IActionCommandHandler<AddPublicationOwnerCommand>, AddPublicationOwnerCommandHandler>();
 
         }

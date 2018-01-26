@@ -25,9 +25,7 @@ namespace PublicationService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-
-            //services.Configure<RabbitmqNetCoreAppConfig>(item => Configuration.GetSection("RabbitmqNetCoreAppConfig").Bind(item));
-            
+           
             RegisterRabbitmqServices(services);
         }
 
@@ -48,10 +46,10 @@ namespace PublicationService
             app.UseMvc();
         }
 
-        public void RegisterRabbitmqServices(IServiceCollection service)
+        public void RegisterRabbitmqServices(IServiceCollection services)
         {
-            RabbitmqServiceRegistration.Register(service,out service);
-            
+            services.Configure<RabbitmqOptions>(Configuration.GetSection("Rabbitmq"));
+            RabbitmqServiceRegistration.Register(services,out services);
         }
     }
 }

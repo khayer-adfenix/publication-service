@@ -10,20 +10,22 @@ namespace AdFenix.RabbitmqNetCore
     {
         private static IConnection _connection = null;
         private static Object lockConnection = new Object();
+        private IOptions<RabbitmqOptions> rabbitmqOptions;
 
-        public RabbitmqConnect()
+        public RabbitmqConnect(IOptions<RabbitmqOptions> rabbitmqOptions)
         {
+            this.rabbitmqOptions = rabbitmqOptions;
         }
 
         private IConnection CreateConnection()
         {
             ConnectionFactory connectionFactory = new ConnectionFactory();
 
-            connectionFactory.HostName = RabbitmqConfig.RabbitmqHost;
-            connectionFactory.UserName = RabbitmqConfig.RabbitmqUserName;
-            connectionFactory.Password = RabbitmqConfig.RabbitmqPassword;
-            connectionFactory.Port = RabbitmqConfig.RabbitmqPort;
-            connectionFactory.VirtualHost = RabbitmqConfig.RabbitmqVirtualHost;
+            connectionFactory.HostName = this.rabbitmqOptions.Value.HostName;
+            connectionFactory.UserName = this.rabbitmqOptions.Value.UserName;
+            connectionFactory.Password = this.rabbitmqOptions.Value.Password;
+            connectionFactory.Port = this.rabbitmqOptions.Value.Port;
+            connectionFactory.VirtualHost = this.rabbitmqOptions.Value.VirtualHost;
 
             return connectionFactory.CreateConnection();
         }
