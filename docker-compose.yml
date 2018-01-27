@@ -1,27 +1,6 @@
 version: '3'
 
 services:
-  publicationservice:
-    image: publicationservice
-    build:
-      context: .
-      dockerfile: PublicationService/Dockerfile
-    ports:
-      - "8888:80"
-    depends_on: 
-      - rabbitmq
-
-  consumerservice:
-    image: consumerservice
-    build:
-      context: .
-      dockerfile: ConsumerService/Dockerfile
-    ports:
-      - "8889:80"
-    depends_on: 
-      - rabbitmq
-      - postgres
-
   rabbitmq:
     image: "rabbitmq:3-management"   
     hostname: "rabbit"
@@ -40,3 +19,24 @@ services:
       - DB_PASSWORD=postgres
     ports:
       - "5432:5432"
+
+  publicationservice:
+    image: adfenix.publication.service
+    build:
+      context: .
+      dockerfile: AdFenix.Publication.Service/Dockerfile
+    ports:
+      - "8888:80"
+    depends_on: 
+      - rabbitmq
+
+  consumerservice:
+    image: adfenix.consumer.service
+    build:
+      context: .
+      dockerfile: AdFenix.Consumer.Service/Dockerfile
+    ports:
+      - "8889:80"
+    depends_on: 
+      - rabbitmq
+      - postgres
