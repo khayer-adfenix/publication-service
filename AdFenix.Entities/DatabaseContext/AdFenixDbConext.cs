@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using AdFenix.Entities.DomainObject;
+﻿using AdFenix.Entities.DomainObject;
 using Microsoft.EntityFrameworkCore;
 
 namespace AdFenix.Entities.DatabaseContext
